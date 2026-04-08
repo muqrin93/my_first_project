@@ -1,1 +1,15 @@
-hello world
+we have different log files as follow:
+
+/var/log/messages : general logs for the system  {{ messages is RHEL , CENTOS || syslog is UBUNTOU , DEBIAN }} 
+grep  fail /var/log/messages ,, grep  error /var/log/messages  ,, grep "Apr  8"  started, stopped /var/log/messages | grep -i error
+grep "Apr  8" /var/log/messages | grep -i fail,denied,critical,warning.. ,, grep sshd /var/log/messages.. grep -Ei "error|fail|denied" file.log
+
+/var/log/secure or /var/log/auth.log : authintication logs
+fail , sudo , accept , invalid
+journalctl -u ssh.service | grep -Ei "fail|accept|sudo|invalid"
+
+
+/var/log/audit.log : selinux logs
+denied ,, avc  ,, permission denied
+ausearch -m AVC -ts today or recent 
+grep -Ei "avc" /var/log/audit.log 
