@@ -1,0 +1,32 @@
+update ubuntou: apt update to bring the updates, then apt upgrade.
+types of update. 1- critical: security and kernal. 2- normal: bux fixes and dependencies. 3- risky: feature updates and major upgrades. { you can see the type if you run apt update }. 
+security updates = auto & bug and dependencies = scheduled & feature , kernal , distribution updates = controlled. 
+
+apt list --upgradable
+apt changelog openssl
+apt-cache policy openssl : policy:  to see is the server security updated, changelog:  to see what has changed
+
+cat /var/run/reboot-required or /var/run/reboot-required.pkgs : to see is the system need reboot and what are packages?
+
+uname -r : to see the kernal version
+
+when you reboot the system and doesnt boot well, enter the grub and choose the older kernal then boot then see from the logs what was the issue { journalctl -xb} then decide whether to delete the newer kernal or to re installed it.
+
+sudo apt remove linux-image-xxx 
+sudo apt autoremove: do this after you assure everything is ok 
+
+live patching: update the kernal without reboot, tools : canonical livepatch and ksplice. 
+
+always the reboot procces not auto. if the security update needs reboot then we do a controlled plan or use live pathcing.
+
+best practice for updating the system. 
+1- staging environment
+2-test the staging environment
+3- rollout: do not do the update to the all servers
+4-monitioring
+5- ready rollback: kernal from grub and choose older kernal. VM snapshot , packages is install older packages { apt install older_packeges } 
+
+
+/etc/apt/apt.conf.d/50unattended: this file is important.you can controll what kind of updates you do like security updates just or some packages are excepted from the update. 
+
+openssl : is a library responsible for encryption.
